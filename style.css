@@ -1,0 +1,497 @@
+/* ===== Hebrew Verbs · Le chat noir — warm & artsy ===== */
+:root {
+  --warm-dark: #5c4033;
+  --warm-dark-soft: #6d5344;
+  --warm-brown: #8b6914;
+  --terracotta: #c4724a;
+  --terracotta-soft: #d4a574;
+  --cream: #f8f4ef;
+  --cream-soft: #ebe5dc;
+  --ivory: #fdfbf7;
+  --ochre: #c9a227;
+  --ochre-dim: #a68521;
+  --ochre-soft: rgba(201, 162, 39, 0.22);
+  --dusty-rose: #b87d7d;
+  --dusty-rose-soft: rgba(184, 125, 125, 0.18);
+  --text: #3d3229;
+  --text-soft: #6b5d52;
+  --shadow: 0 4px 24px rgba(92, 64, 51, 0.12);
+  --shadow-dark: 0 8px 32px rgba(92, 64, 51, 0.18);
+  --radius: 0.5rem;
+  --radius-sm: 0.35rem;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Heebo', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--cream);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -30%, var(--ochre-soft), transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(212, 165, 116, 0.2), transparent 45%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("./3.png") center / cover no-repeat;
+  opacity: 0.28;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.app {
+  position: relative;
+  z-index: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1.5rem;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+/* ----- Header · logo (photo 4) ----- */
+.header {
+  position: relative;
+  padding: 1.5rem 0 0.75rem;
+  text-align: center;
+}
+
+.header-logo {
+  display: block;
+  max-width: 8rem;
+  max-height: 4rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto 0.5rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--warm-dark);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-soft);
+  margin: 0.2rem 0 0;
+  letter-spacing: 0.08em;
+}
+
+/* ----- Views ----- */
+.view {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.view.active {
+  display: flex;
+}
+
+.main {
+  flex: 1;
+}
+
+/* ----- Home: intro card (photos) ----- */
+.intro-card {
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  background: var(--ivory);
+  border: 1px solid var(--cream-soft);
+}
+
+.intro-card-photo {
+  width: 100%;
+  max-width: 10rem;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.intro-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.heart {
+  color: #2563eb;
+  font-style: normal;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.filter-section label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.filter-section select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  border: 1px solid var(--cream-soft);
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.filter-section select:hover,
+.filter-section select:focus {
+  border-color: var(--ochre-dim);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--ochre-soft);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+/* ----- Buttons ----- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--warm-dark);
+  color: var(--cream);
+  box-shadow: var(--shadow);
+}
+.btn-primary:hover {
+  background: var(--warm-dark-soft);
+  box-shadow: var(--shadow-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--warm-dark);
+  border: 1px solid var(--warm-dark);
+}
+.btn-secondary:hover {
+  background: var(--warm-dark-soft);
+  color: var(--cream);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-soft);
+  border: 1px solid var(--cream-soft);
+}
+.btn-ghost:hover {
+  border-color: var(--ochre-dim);
+  color: var(--text);
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s ease;
+}
+.btn-icon:hover {
+  color: var(--terracotta);
+}
+
+/* ----- Card (generic) ----- */
+.card {
+  background: var(--ivory);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--cream-soft);
+}
+.cat-card {
+  border-color: rgba(92, 64, 51, 0.12);
+}
+
+/* ----- Flashcards view ----- */
+.flash-header,
+.quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+.progress-text {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+.flash-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+  padding: 0.5rem 0;
+}
+
+.flashcard {
+  width: 100%;
+  max-width: 20rem;
+  aspect-ratio: 4/3;
+  perspective: 1000px;
+  cursor: pointer;
+  outline: none;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+  transform-style: preserve-3d;
+  border-radius: var(--radius);
+  background: var(--ivory);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--cream-soft);
+}
+
+.flashcard.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+  background-color: transparent;
+  background-image: url("2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text);
+  border-color: var(--cream-soft);
+}
+.flashcard-back .card-text {
+  position: relative;
+  z-index: 1;
+  color: var(--warm-dark);
+  text-shadow: 0 0 8px rgba(253, 251, 247, 0.9), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.card-text {
+  font-size: clamp(1.2rem, 5vw, 1.65rem);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.4;
+  color: var(--text);
+}
+.card-text[dir="rtl"] {
+  font-family: var(--font-body);
+}
+
+.tap-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  letter-spacing: 0.03em;
+}
+.flashcard-back .tap-hint {
+  color: var(--terracotta-soft);
+}
+
+.flash-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+}
+.flash-actions .btn-ghost {
+  flex: 1;
+  min-width: 10rem;
+}
+.flash-actions .btn-next {
+  min-width: 6rem;
+}
+
+/* ----- Quiz view ----- */
+.quiz-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.quiz-prompt {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.quiz-term {
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.quiz-option {
+  display: block;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  text-align: left;
+  background: var(--ivory);
+  border: 1px solid var(--cream-soft);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.quiz-option:hover {
+  border-color: var(--ochre-dim);
+  background: var(--ochre-soft);
+}
+.quiz-option[dir="rtl"] {
+  text-align: right;
+}
+.quiz-option.correct {
+  border-color: var(--ochre-dim);
+  background: var(--ochre-soft);
+}
+.quiz-option.wrong {
+  border-color: var(--dusty-rose);
+  background: var(--dusty-rose-soft);
+}
+.quiz-option:disabled {
+  cursor: default;
+  opacity: 0.95;
+}
+
+.quiz-result {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.quiz-result.hidden {
+  display: none;
+}
+
+.quiz-result h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--text);
+}
+
+.grade-score {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--warm-dark);
+  margin: 0;
+}
+
+.grade-pct {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  margin: 0 0 1.25rem;
+}
+
+/* ----- Footer ----- */
+.footer {
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+
+.paw {
+  color: var(--terracotta);
+  margin-right: 0.25rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ----- Desktop ----- */
+@media (min-width: 480px) {
+  .app {
+    padding: 0 1.5rem 2rem;
+  }
+  .flashcard {
+    max-width: 22rem;
+  }
+}

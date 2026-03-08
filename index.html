@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hebrew Verbs · Made for Judie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Home screen -->
+    <header class="header">
+      <img src="./4.png" alt="Hebrew Verbs" class="header-logo" />
+      <h1 class="title">Hebrew Verbs</h1>
+      <p class="subtitle">Made for Judie <span class="heart">💙</span></p>
+    </header>
+
+    <main class="main">
+      <section id="home-view" class="view active">
+        <div class="card cat-card intro-card">
+          <img src="./2.png" alt="" class="intro-card-photo" />
+          <p>Study present & past. Choose a deck, tap to flip.</p>
+        </div>
+
+        <div class="filter-section">
+          <label for="verb-filter">Study one verb only</label>
+          <select id="verb-filter">
+            <option value="">All verbs (present + past)</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="btn-flashcards" class="btn btn-primary">Flashcards</button>
+          <button type="button" id="btn-quiz" class="btn btn-secondary">Quiz · 12 questions</button>
+        </div>
+      </section>
+
+      <!-- Flashcards view -->
+      <section id="flashcards-view" class="view">
+        <div class="flash-header">
+          <button type="button" id="btn-back-flash" class="btn-icon" aria-label="Back">←</button>
+          <span id="flash-progress" class="progress-text">1 / 1</span>
+        </div>
+        <div class="flash-area">
+          <div id="flashcard" class="flashcard" tabindex="0">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">
+                <span id="card-front-text" class="card-text" dir="auto"></span>
+                <p class="tap-hint">tap to flip</p>
+              </div>
+              <div class="flashcard-back">
+                <span id="card-back-text" class="card-text" dir="auto"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-actions">
+          <button type="button" id="btn-dont-know" class="btn btn-ghost">See again in 5–10 cards</button>
+          <button type="button" id="btn-next" class="btn btn-primary">Next →</button>
+        </div>
+      </section>
+
+      <!-- Quiz view -->
+      <section id="quiz-view" class="view">
+        <div class="quiz-header">
+          <button type="button" id="btn-back-quiz" class="btn-icon" aria-label="Back">←</button>
+          <span id="quiz-progress" class="progress-text">Question 1 of 12</span>
+        </div>
+        <div id="quiz-content" class="quiz-content">
+          <p id="quiz-prompt" class="quiz-prompt"></p>
+          <p id="quiz-term" class="quiz-term" dir="auto"></p>
+          <div id="quiz-options" class="quiz-options"></div>
+        </div>
+        <div id="quiz-result" class="quiz-result hidden">
+          <h2 id="quiz-grade-title">Your grade</h2>
+          <p id="quiz-grade-score" class="grade-score"></p>
+          <p id="quiz-grade-pct" class="grade-pct"></p>
+          <button type="button" id="btn-quiz-again" class="btn btn-primary">Try again</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Made for Judie <span class="heart">💙</span>
+    </footer>
+  </div>
+
+  <script src="verbs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
