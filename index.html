@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hebrew Verbs · Made for Judie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <img src="./4.png" alt="Hebrew Verbs" class="header-logo" />
+      <div class="header-title-row">
+        <h1 class="title">Hebrew Verbs</h1>
+        <button type="button" id="btn-nikud-toggle" class="btn-nikud" aria-label="Toggle nikud" title="Toggle vowels (nikud)">
+          <span class="nikud-label">נִקּוּד</span>
+          <span class="nikud-status">OFF</span>
+        </button>
+        <button type="button" id="btn-guide" class="btn-icon btn-guide-icon" aria-label="Help" title="How to use the app">?</button>
+      </div>
+      <p class="subtitle">Made for Judie <span class="heart">💙</span></p>
+    </header>
+
+    <main class="main">
+
+      <!-- ═══ HOME VIEW ═══ -->
+      <section id="home-view" class="view active">
+        <div class="card cat-card intro-card">
+          <img src="./2.png" alt="" class="intro-card-photo" />
+          <p>Master Hebrew verbs deeply. Study every conjugation — present, past &amp; future.</p>
+        </div>
+
+        <!-- Mastery display -->
+        <div id="mastery-display" class="mastery-display hidden">
+          <span id="mastery-verb-label" class="mastery-verb-label"></span>
+          <span id="mastery-level-badge" class="mastery-badge level-0">Beginner</span>
+        </div>
+
+        <!-- Study mode tabs -->
+        <div class="mode-tabs" role="group" aria-label="Study mode">
+          <button type="button" class="mode-tab active" data-mode="flashcards">Flashcards</button>
+          <button type="button" class="mode-tab" data-mode="typing">Type It</button>
+          <button type="button" class="mode-tab" data-mode="quiz">Quiz</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+          <div class="filter-row">
+            <label for="verb-filter" class="filter-label">Verb</label>
+            <select id="verb-filter">
+              <option value="">All verbs</option>
+            </select>
+          </div>
+          <div class="filter-row">
+            <label class="filter-label">Tense</label>
+            <div class="tense-tabs" role="group" aria-label="Tense filter">
+              <button type="button" class="tense-tab active" data-tense="all">All</button>
+              <button type="button" class="tense-tab" data-tense="present">Present</button>
+              <button type="button" class="tense-tab" data-tense="past">Past</button>
+              <button type="button" class="tense-tab" data-tense="future">Future</button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <label class="filter-label">Order</label>
+            <div class="tense-tabs" role="group" aria-label="Order">
+              <button type="button" class="order-tab active" data-order="shuffle">Shuffle</button>
+              <button type="button" class="order-tab" data-order="ordered">In order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="actions" id="home-actions">
+          <button type="button" id="btn-start" class="btn btn-primary">Start Flashcards →</button>
+          <button type="button" id="btn-review-deck" class="btn btn-ghost review-deck-btn hidden">
+            📋 Review Deck <span id="review-count" class="review-count-badge">0</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ═══ FLASHCARDS VIEW ═══ -->
+      <section id="flashcards-view" class="view">
+        <div class="flash-header">
+          <button type="button" id="btn-back-flash" class="btn-icon" aria-label="Back">←</button>
+          <span id="flash-progress" class="progress-text">1 / 1</span>
+          <div class="flash-header-right">
+            <button type="button" id="btn-info" class="btn-icon btn-info-icon" aria-label="Verb info" title="Show verb info">ℹ</button>
+          </div>
+        </div>
+
+        <div class="tense-indicator-bar">
+          <span id="tense-indicator" class="tense-indicator"></span>
+          <span id="verb-indicator" class="verb-indicator"></span>
+        </div>
+
+        <div class="flash-area">
+          <div id="flashcard" class="flashcard" tabindex="0">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">
+                <span id="card-front-text" class="card-text" dir="auto"></span>
+                <p class="tap-hint">tap to flip</p>
+              </div>
+              <div class="flashcard-back">
+                <span id="card-back-text" class="card-text" dir="auto"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flash-actions">
+          <button type="button" id="btn-flip" class="btn btn-secondary">Flip ↺</button>
+          <button type="button" id="btn-again" class="btn btn-wrong">✗ Again</button>
+          <button type="button" id="btn-got-it" class="btn btn-right">✓ Got it</button>
+        </div>
+      </section>
+
+      <!-- ═══ TYPING VIEW ═══ -->
+      <section id="typing-view" class="view">
+        <div class="flash-header">
+          <button type="button" id="btn-back-typing" class="btn-icon" aria-label="Back">←</button>
+          <span id="typing-progress" class="progress-text">1 / 1</span>
+          <div class="flash-header-right">
+            <button type="button" id="btn-info-typing" class="btn-icon btn-info-icon" aria-label="Verb info" title="Show verb info">ℹ</button>
+          </div>
+        </div>
+
+        <div class="tense-indicator-bar">
+          <span id="typing-tense-indicator" class="tense-indicator"></span>
+          <span id="typing-verb-indicator" class="verb-indicator"></span>
+        </div>
+
+        <div class="typing-area">
+          <p id="typing-prompt" class="typing-prompt"></p>
+          <div id="typing-subject-hint" class="typing-subject-hint hidden"></div>
+          <div id="typing-question" class="typing-question" dir="auto"></div>
+          <div id="typing-feedback" class="typing-feedback hidden"></div>
+          <div class="typing-input-row">
+            <input type="text" id="typing-input" class="typing-input" dir="auto"
+              placeholder="Type your answer..." autocomplete="off" autocorrect="off"
+              autocapitalize="off" spellcheck="false" />
+            <button type="button" id="btn-check" class="btn btn-primary">Check</button>
+          </div>
+          <div class="typing-hint-row hidden" id="typing-hint-row">
+            <span id="typing-hint-text" class="typing-hint-text"></span>
+          </div>
+        </div>
+
+        <div class="flash-actions">
+          <button type="button" id="btn-typing-dont-know" class="btn btn-ghost">See again ↩</button>
+          <button type="button" id="btn-typing-next" class="btn btn-primary">Next →</button>
+        </div>
+      </section>
+
+      <!-- ═══ QUIZ VIEW ═══ -->
+      <section id="quiz-view" class="view">
+        <div class="quiz-header">
+          <button type="button" id="btn-back-quiz" class="btn-icon" aria-label="Back">←</button>
+          <span id="quiz-progress" class="progress-text">Question 1 of 12</span>
+        </div>
+        <div id="quiz-content" class="quiz-content">
+          <p id="quiz-prompt" class="quiz-prompt"></p>
+          <p id="quiz-term" class="quiz-term" dir="auto"></p>
+          <div id="quiz-options" class="quiz-options"></div>
+        </div>
+        <div id="quiz-result" class="quiz-result hidden">
+          <h2 id="quiz-grade-title">Your grade</h2>
+          <p id="quiz-grade-score" class="grade-score"></p>
+          <p id="quiz-grade-pct" class="grade-pct"></p>
+          <button type="button" id="btn-quiz-again" class="btn btn-primary">Try again</button>
+        </div>
+      </section>
+
+      <!-- ═══ REVIEW DECK VIEW ═══ -->
+      <section id="review-view" class="view">
+        <div class="flash-header">
+          <button type="button" id="btn-back-review" class="btn-icon" aria-label="Back">←</button>
+          <span class="progress-text">Review Deck</span>
+        </div>
+        <div class="review-content">
+          <p class="review-intro">These cards have been missed 3+ times. Practice them until mastered.</p>
+          <div id="review-list" class="review-list"></div>
+          <p id="review-round-label" class="review-round-label"></p>
+          <button type="button" id="btn-start-review" class="btn btn-primary">Study Review Deck →</button>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      Made for Judie <span class="heart">💙</span>
+    </footer>
+  </div>
+
+  <!-- ═══ INFO PANEL (modal overlay) ═══ -->
+  <div id="info-panel" class="info-panel hidden" role="dialog" aria-modal="true" aria-label="Verb information">
+    <div class="info-panel-backdrop"></div>
+    <div class="info-panel-content">
+      <button type="button" id="btn-close-info" class="btn-icon info-close-btn" aria-label="Close">✕</button>
+
+      <div class="info-section">
+        <div class="info-hebrew-row">
+          <span id="info-he" class="info-he-plain" dir="rtl"></span>
+          <span id="info-he-nikud" class="info-he-nikud" dir="rtl"></span>
+        </div>
+        <p id="info-en" class="info-en"></p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-item-label">שורש (Root)</span>
+          <span id="info-shoresh" class="info-item-value" dir="rtl"></span>
+        </div>
+        <div class="info-item">
+          <span class="info-item-label">Tense</span>
+          <span id="info-tense" class="info-item-value"></span>
+        </div>
+      </div>
+
+      <div class="info-example" id="info-example-section">
+        <span class="info-item-label">Example sentence</span>
+        <p id="info-example-he" class="info-example-he" dir="rtl"></p>
+        <p id="info-example-en" class="info-example-en"></p>
+      </div>
+
+      <div class="info-audio-row">
+        <button type="button" id="btn-audio" class="btn btn-secondary btn-audio">
+          🔊 Listen
+        </button>
+        <button type="button" id="btn-audio-example" class="btn btn-ghost btn-audio">
+          🔊 Hear sentence
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GUIDE MODAL ═══ -->
+  <div id="guide-modal" class="guide-modal hidden" role="dialog" aria-modal="true" aria-label="How to use">
+    <div class="guide-backdrop"></div>
+    <div class="guide-content">
+      <button type="button" id="btn-close-guide" class="btn-icon guide-close-btn" aria-label="Close">✕</button>
+      <h2 class="guide-title">How to use Hebrew Verbs 🐱</h2>
+
+      <div class="guide-section">
+        <h3 class="guide-section-title">🃏 Flashcards</h3>
+        <p>Flip the card, then be honest with yourself:</p>
+        <ul>
+          <li><strong class="txt-right">✓ Got it</strong> — you knew the answer before flipping. Builds mastery.</li>
+          <li><strong class="txt-wrong">✗ Again</strong> — you hesitated or got it wrong. The card returns soon.</li>
+        </ul>
+      </div>
+
+      <div class="guide-section">
+        <h3 class="guide-section-title">⌨️ Type It</h3>
+        <p>Type the full translation. Spelling counts. Wrong answers come back automatically later in the session.</p>
+      </div>
+
+      <div class="guide-section">
+        <h3 class="guide-section-title">❓ Quiz</h3>
+        <p>12 multiple-choice questions mixing Hebrew ↔ English.</p>
+      </div>
+
+      <div class="guide-section">
+        <h3 class="guide-section-title">נִקּוּד Nikud toggle</h3>
+        <p>Shows vowels on Hebrew text. Study with it <strong>ON</strong> first, then switch it <strong>OFF</strong> to train real reading. <strong>Mastery is only counted without nikud.</strong></p>
+      </div>
+
+      <div class="guide-section">
+        <h3 class="guide-section-title">📋 Review Deck</h3>
+        <p>After 3 misses in a row, a verb moves here automatically. Each time you study the Review Deck, it alternates between Flashcards and Type It.</p>
+      </div>
+
+      <div class="guide-section">
+        <h3 class="guide-section-title">⭐ Mastery levels</h3>
+        <p>Select a verb from the dropdown on the home screen to check your level: Beginner → Familiar → Good → <strong>Mastered</strong>.</p>
+      </div>
+
+      <div class="guide-section">
+        <h3 class="guide-section-title">🔊 Audio pronunciation</h3>
+        <p>Tap the <strong>ℹ</strong> button on any card to open the verb panel, then tap <strong>🔊 Listen</strong> or <strong>🔊 Hear sentence</strong>.</p>
+        <p>Hebrew audio uses your device's built-in voice:</p>
+        <ul>
+          <li><strong>iPhone / Mac</strong> — works out of the box (voice: Carmit)</li>
+          <li><strong>Android / Chrome</strong> — works out of the box (Google Hebrew)</li>
+          <li><strong>Windows</strong> — go to <em>Settings → Time &amp; Language → Language → Add a language → עברית</em>, then restart the browser</li>
+        </ul>
+        <p>If the first tap produces silence, tap once anywhere on the page and try again.</p>
+      </div>
+
+      <button type="button" id="btn-guide-got-it" class="btn btn-primary guide-cta">Let's study! 🐱</button>
+    </div>
+  </div>
+
+  <!-- ═══ CELEBRATION OVERLAY ═══ -->
+  <div id="celebration-overlay" class="celebration-overlay hidden">
+    <div class="celebration-backdrop"></div>
+    <div class="celebration-content">
+      <video id="celebration-video" class="celebration-video" src="cat-gif.mp4" playsinline muted></video>
+      <button type="button" id="btn-close-celebration" class="btn btn-primary celebration-btn">Keep going! 🐱</button>
+    </div>
+  </div>
+
+  <script src="verbs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
